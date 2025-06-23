@@ -1,0 +1,52 @@
+name: wiseteam
+
+services:
+  php:
+    container_name: wiseteam_php
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 9000:9000
+    networks:
+      - wiseteam-network
+
+  nginx:
+    container_name: wiseteam_nginx
+    image: nginx:latest
+    volumes:
+      - ./Docker/setup.conf:/etc/nginx/conf.d/default.conf:ro
+      - .:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - "8000:80"
+    networks:
+      - wiseteam-network
+
+  db:
+    image: postgres:17
+    container_name: wiseteam_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_DB: wiseteam
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    networks:
+      - wiseteam-network
+
+  db-ui:
+    depends_on:
+      - db
+    container_name: wiseteam_db_ui
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - wiseteam-network
+
+networks:
+  wiseteam-network:
