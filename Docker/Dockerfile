@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     libpq-dev
 
+
 RUN docker-php-ext-install \
     intl \
     pdo \
@@ -24,11 +25,16 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY ../ .
+COPY . .
 
 RUN chown -R www-data:www-data /var/www/html
 
 RUN composer install --no-interaction --no-progress --optimize-autoloader
 
+COPY Docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 EXPOSE 9000
+
 CMD ["php-fpm"]
