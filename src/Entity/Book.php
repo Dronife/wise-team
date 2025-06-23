@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\Genre;
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,8 +27,8 @@ class Book
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $publicationDate = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $genre = null;
+    #[ORM\Column(length: 255, enumType: Genre::class)]
+    private ?Genre $genre = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $numberOfCopies = null;
@@ -85,12 +86,12 @@ class Book
         return $this;
     }
 
-    public function getGenre(): ?string
+    public function getGenre(): ?Genre
     {
         return $this->genre;
     }
 
-    public function setGenre(string $genre): static
+    public function setGenre(Genre $genre): static
     {
         $this->genre = $genre;
 
