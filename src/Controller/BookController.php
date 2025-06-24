@@ -22,7 +22,7 @@ class BookController extends AbstractController
     public function index(Request $request,): Response
     {
         $page = (int)$request->query->get('page', 1);
-        $perPage = (int)$request->query->get('perPage', 1);
+        $perPage = (int)$request->query->get('perPage', 10);
 
         return $this->render(
             'book/index.html.twig',
