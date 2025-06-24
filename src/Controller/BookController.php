@@ -73,4 +73,13 @@ class BookController extends AbstractController
             ],
         );
     }
+
+    #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
+    public function delete(Book $book): Response
+    {
+        $this->entityManager->remove($book);
+        $this->entityManager->flush();
+
+        return $this->json(['message' => 'success'], Response::HTTP_OK);
+    }
 }
