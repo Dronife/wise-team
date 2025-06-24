@@ -26,9 +26,11 @@
     </div>
 
     {{ knp_pagination_rel_links(books) }}
+    {{ encore_entry_script_tags('success-message') }}
+    {{ encore_entry_script_tags('error-message') }}
     {{ encore_entry_script_tags('table-pagination') }}
     {{ encore_entry_script_tags('create') }}
+    {{ encore_entry_script_tags('edit') }}
     {{ encore_entry_script_tags('delete') }}
-
 
 {% endblock %}

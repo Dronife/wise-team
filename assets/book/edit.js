@@ -1,22 +1,25 @@
 import {successMessage} from "./success-message";
 
 $(function () {
-    $('#add-book').on('click', function () {
+    $(document).on('click', '#edit-book', function () {
+        const id = $(this).closest('tr').data('id');
         $('#modal').removeClass('hidden')
             .find('#modal-content')
-            .load('/books/new');
+            .load('/books/' + id + '/edit');
     });
 
     $(document).on('submit', '#book-form', function (e) {
         e.preventDefault();
+
         $.ajax({
             type: 'POST',
-            url: this.action,
+            url:  this.action,
             data: $(this).serialize(),
             success: function () {
                 $('#modal').addClass('hidden');
                 $('#book-table').load('/books/ #book-table > *');
-                successMessage('Book created successfully.')
+
+                successMessage('Book updated successfully.')
             },
             error: function (response) {
                 if (response.status < 500) {
@@ -28,7 +31,4 @@ $(function () {
         });
     });
 
-    $('#modal').on('click', function (element) {
-        if (element.target === this) $(this).addClass('hidden');
-    });
 });

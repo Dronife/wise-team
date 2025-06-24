@@ -25,9 +25,13 @@
                     <td class="px-4 py-2">{{ book.numberOfCopies ?? '—' }}</td>
                     <td class="px-4 py-2">{{ book.author.name }}</td>
                     <td class="px-4 py-2 text-right">
-                        <button class="del-book text-red-600 hover:text-red-800">
+                        <button id="edit-book" class="text-gray-600 hover:text-blue-400 cursor-pointer">
+                            Edit
+                        </button>
+                        <button class="del-book text-red-600 hover:text-red-400 cursor-pointer">
                             Delete
                         </button>
+
                     </td>
                 </tr>
             {% else %}

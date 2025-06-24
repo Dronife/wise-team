@@ -21,8 +21,11 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('success-message', './assets/book/success-message.js')
+    .addEntry('error-message', './assets/book/error-message.js')
     .addEntry('table-pagination', './assets/book/table-pagination.js')
     .addEntry('create', './assets/book/create.js')
+    .addEntry('edit', './assets/book/edit.js')
     .addEntry('delete', './assets/book/delete.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

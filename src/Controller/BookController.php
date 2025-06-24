@@ -37,14 +37,50 @@ class BookController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(
-        Request $request,
-    ): Response {
+    public function new(Request $request): Response {
         $book = new Book();
         $form = $this->createForm(
             BookType::class, $book, [
             'action' => $this->generateUrl('book_new'),
         ],
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($book);
+            $this->entityManager->flush();
+
+            return $this->json(['message' => 'success'], Response::HTTP_OK);
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            return $this->render(
+                'book/form.html.twig',
+                [
+                    'form' => $form->createView(),
+                ],
+                new Response(null, Response::HTTP_UNPROCESSABLE_ENTITY),
+            );
+        }
+
+        return $this->render(
+            'book/form.html.twig',
+            [
+                'form' => $form->createView(),
+            ],
+        );
+    }
+
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Book $book): Response {
+        $form = $this->createForm(
+            BookType::class,
+            $book,
+            [
+                'action' => $this->generateUrl('book_edit', ['id' => $book->getId()]),
+                'method' => 'POST',
+            ]
         );
 
         $form->handleRequest($request);

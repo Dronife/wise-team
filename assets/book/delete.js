@@ -1,3 +1,6 @@
+import {successMessage} from "./success-message";
+import {errorMessage} from "./error-message";
+
 $(document).on('click', '.del-book', function (e) {
     e.preventDefault();
     if (!confirm('Delete this book?')) return;
@@ -10,24 +13,10 @@ $(document).on('click', '.del-book', function (e) {
         url: '/books/' + id,
         success: function () {
             $('#book-table').load('/books #book-table > *')
-            let successMessage = $('#success-message');
-
-            successMessage.removeClass('hidden').text('Book deleted successfully.');
-            setTimeout(() => {
-                successMessage.hide(0, function () {
-                    $(this).addClass('hidden').text('');
-                });
-            }, 5000);
+            successMessage('Book deleted successfully.')
         },
         error: function() {
-            let errorMessage = $('#error-message');
-
-            errorMessage.removeClass('hidden').text('Something bad happened can not delete book. Try again later.');
-            setTimeout(() => {
-                errorMessage.hide(0, function () {
-                    $(this).addClass('hidden').text('');
-                });
-            }, 5000);
+            errorMessage('Something bad happened can not delete book. Try again later.')
         }
     });
 });
