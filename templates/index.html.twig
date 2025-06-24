@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20 md:py-28 text-center  shadow-xl mx-auto ">
+    <section class="min-h-screen flex items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20 md:py-28 text-center  shadow-xl mx-auto ">
         <div class="container mx-auto px-4">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-down">
-                Welcome to library admin panel
+                {% if app.user %}
+                    Welcome back {{ app.user.email }}
+                {% else %}
+                    Welcome to library admin panel
+                {% endif %}
             </h1>
         </div>
     </section>
