@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="min-h-screen flex  py-20 md:py-28">
+    <section class="min-h-screen  py-20 md:py-28">
         <div class="container mx-auto px-4">
+
             <div class="overflow-x-auto rounded-xl shadow-lg">
                 <table class="min-w-full text-left">
                     <thead class="bg-gray-100 font-semibold uppercase text-sm">
@@ -36,6 +37,12 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="mt-6 flex justify-center">
+                {{ knp_pagination_render(books) }}
+            </div>
+
         </div>
     </section>
+    {{ knp_pagination_rel_links(books) }}
 {% endblock %}
