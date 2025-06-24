@@ -1,0 +1,13 @@
+{{ form_start(form, { attr: { id:'book-form', class:'space-y-4' } }) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.isbn) }}
+    {{ form_row(form.publicationDate) }}
+    {{ form_row(form.genre) }}
+    {{ form_row(form.numberOfCopies) }}
+    {{ form_row(form.author) }}
+
+<button type="submit"
+        class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-md my-5">
+    Save
+</button>
+{{ form_end(form) }}

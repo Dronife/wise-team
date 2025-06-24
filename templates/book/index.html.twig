@@ -2,8 +2,30 @@
 
 {% block body %}
     <section class="min-h-screen  py-20 md:py-28">
-        {% include 'book/table.html.twig' %}
+        <div class="container mx-auto px-4">
+            <button id="add-book"
+                    class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-md my-5">
+                + Add Book
+            </button>
+
+            {% include 'book/table.html.twig' %}
+        </div>
     </section>
+
+    <div id="modal" class="fixed inset-0 bg-black/50 hidden">
+
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-lg mx-auto mt-20">
+            <div class="bg-red-300 border border-red-500 text-red-800 my-5 p-5 hidden" id="unexpected-error">Unexpected
+                error try again later
+            </div>
+            <div id="modal-content"></div>
+
+        </div>
+    </div>
+
     {{ knp_pagination_rel_links(books) }}
     {{ encore_entry_script_tags('table-pagination') }}
+    {{ encore_entry_script_tags('create') }}
+
+
 {% endblock %}
