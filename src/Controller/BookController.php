@@ -19,13 +19,13 @@ class BookController extends AbstractController
     }
 
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(Request $request,): Response
+    public function index(Request $request): Response
     {
         $page = (int)$request->query->get('page', 1);
         $perPage = (int)$request->query->get('perPage', 10);
 
         return $this->render(
-            'book/index.html.twig',
+            $request->isXmlHttpRequest() ?  'book/table.html.twig' : 'book/index.html.twig',
             [
                 'books' => $this->bookProvider->getAllPaginated($page, $perPage),
             ],

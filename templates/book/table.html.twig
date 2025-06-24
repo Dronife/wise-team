@@ -1,0 +1,41 @@
+<div class="container mx-auto px-4" id="book-table">
+
+    <div class="overflow-x-auto rounded-xl shadow-lg">
+        <table class="min-w-full text-left" >
+            <thead class="bg-gray-100 font-semibold uppercase text-sm">
+            <tr>
+                <th class="px-4 py-3">Title</th>
+                <th class="px-4 py-3">ISBN</th>
+                <th class="px-4 py-3">Published</th>
+                <th class="px-4 py-3">Genre</th>
+                <th class="px-4 py-3">Copies</th>
+                <th class="px-4 py-3">Author</th>
+            </tr>
+            </thead>
+
+            <tbody class="divide-y">
+            {% for book in books %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 font-medium">{{ book.title }}</td>
+                    <td class="px-4 py-2">{{ book.isbn }}</td>
+                    <td class="px-4 py-2">{{ book.publicationDate|date('Y-m-d') }}</td>
+                    <td class="px-4 py-2">{{ book.genre.value }}</td>
+                    <td class="px-4 py-2">{{ book.numberOfCopies ?? '—' }}</td>
+                    <td class="px-4 py-2">{{ book.author.name }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="px-4 py-4 text-center text-gray-500">
+                        No books found.
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-6 flex justify-center">
+        {{ knp_pagination_render(books) }}
+    </div>
+
+</div>
