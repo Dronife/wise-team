@@ -13,6 +13,12 @@ else
     echo "No migrations found, skipping"
 fi
 
+echo "Loading fixtures..."
+php bin/console doctrine:fixtures:load --no-interaction || {
+  echo "Failed to load fixtures"
+  exit 1
+}
+
 echo "Resetting test database..."
 php bin/console doctrine:database:drop --env=test --if-exists --force || {
   echo "Failed to drop test database"
@@ -25,13 +31,9 @@ php bin/console doctrine:database:create --env=test || {
 }
 
 if ls migrations/*.php 1> /dev/null 2>&1; then
-  echo "Running test migrations..."
-  php bin/console doctrine:migrations:migrate --env=test --no-interaction || {
-    echo "Test migrations failed"
-    exit 1
-  }
+    php bin/console doctrine:migrations:migrate --env=test --no-interaction
 else
-  echo "No migrations found, skipping test migrations"
+    echo "No migrations found, skipping"
 fi
 
 exec "$@"

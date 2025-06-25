@@ -29,7 +29,9 @@ COPY . .
 
 RUN chown -R www-data:www-data /var/www/html
 
-RUN composer install --no-interaction --no-progress --optimize-autoloader
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN npm i
+RUN npm run dev
 
 COPY Docker/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r$//' /entrypoint.sh
