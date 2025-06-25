@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="min-h-screen  py-20 md:py-28">
+        <div class="container mx-auto w-100">
+            <h1 class="text-2xl mb-20">New author</h1>
+            {{ form_start(form, { attr: { id:'book-form', class:'space-y-4' } }) }}
+            {{ form_row(form.name) }}
+
+            <button type="submit"
+                    class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-md my-5">
+                Save
+            </button>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

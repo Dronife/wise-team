@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="min-h-screen  py-20 md:py-28">
+        <div class="container mx-auto px-4">
+            <div class="bg-green-200 border border-green-600 text-green-800 p-5 my-5 hidden" id="success-message"></div>
+            <div class="bg-red-200 border border-red-600 text-red-800 p-5 my-5 hidden" id="error-message"></div>
+            <a id="add-book" href="{{ path('author_new') }}"
+                    class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-md my-5">
+                + Add Author
+            </a>
+
+            {% include 'author/table.html.twig' %}
+        </div>
+    </section>
+
+    {{ knp_pagination_rel_links(authors) }}
+    {{ encore_entry_script_tags('success-message') }}
+
+{% endblock %}
