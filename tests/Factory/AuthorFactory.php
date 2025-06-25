@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Fixture;
+namespace App\Tests\Factory;
 
 use App\Entity\Author;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
@@ -20,5 +20,12 @@ final class AuthorFactory extends PersistentProxyObjectFactory
         return [
             'name' => self::faker()->text(255),
         ];
+    }
+
+    protected function initialize(): static
+    {
+        return $this
+            // ->afterInstantiate(function(Author $author): void {})
+        ;
     }
 }
